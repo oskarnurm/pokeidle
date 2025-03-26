@@ -9,6 +9,8 @@ export const model = {
   data: "",
   pokemonPromiseState: {},
   listPromiseState: {},
+  searchQuery: "",
+  filteredList: [],
   name: "",
 
   loadData(name) {
@@ -26,5 +28,18 @@ export const model = {
 
   getList() {
     return this.listPromiseState.data || [];
+  },
+
+  updateSearchQuery(query) {
+    this.searchQuery = query;
+    //const list = this.getList();
+    function filterByQuery(item) {
+      return item.name.toLowerCase().includes(query.toLowerCase());
+    }
+    this.filteredList = this.getList().filter(filterByQuery);
+  },
+
+  getFilteredList() {
+    return this.filteredList;
   },
 };

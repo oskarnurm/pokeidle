@@ -18,5 +18,6 @@ export async function fetchPokemonList() {
   }
   const body = await response.json();
   // data.results is an array of objects { name, url }
+  console.log(body.results);
   return body.results;
 }
