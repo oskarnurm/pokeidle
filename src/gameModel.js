@@ -1,19 +1,30 @@
 import { resolvePromise } from "./resolvePromise";
-import { getPokemon } from "./api";
+import { fetchPokemonData, fetchPokemonList } from "./api";
 
 /* 
    The Model keeps the state of the application (Application State). 
    It is an abstract object, i.e. it knows nothing about graphics and interaction.
 */
-const model = {
-  game: "PokeIdle",
-  url: "https://pokeapi.co/api/v2/pokemon/pikachu",
+export const model = {
   data: "",
   pokemonPromiseState: {},
+  listPromiseState: {},
+  name: "",
 
-  getData(name) {
-    resolvePromise(getPokemon(name), this.pokemonPromiseState);
+  loadData(name) {
+    const promise = fetchPokemonData(name);
+    resolvePromise(promise, this.pokemonPromiseState);
+  },
+
+  getName() {
+    return this.pokemonPromiseState.data?.name || "";
+  },
+
+  loadPokemonList() {
+    resolvePromise(fetchPokemonList(), this.listPromiseState);
+  },
+
+  getList() {
+    return this.listPromiseState.data || [];
   },
 };
-
-export { model };
