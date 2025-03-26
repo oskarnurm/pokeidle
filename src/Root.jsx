@@ -1,8 +1,8 @@
-import './App.css'
+import './app.css'
 import { Game } from "./gamePresenter.jsx"
 import { observer } from "mobx-react-lite";
 
-const App = observer(function App(props) {
+const app = observer(function app(props) {
   return (
     <>
       <div>
@@ -12,4 +12,4 @@ const App = observer(function App(props) {
   )
 });
 
-export default App
+export default app
